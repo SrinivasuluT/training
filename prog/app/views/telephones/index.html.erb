@@ -1,0 +1,37 @@
+<h1>Listing telephones</h1>
+
+<%=form_tag("/telephones", :method => "get") do %>
+ Search Key: <%=text_field_tag :q, params[:q]%>
+ Match:<%= select_tag(:a, options_for_select([['--select--',0],['Exact', 1],['Startwith', 2]]))%>
+ <%=submit_tag ("search")%>
+<%end%>
+
+
+
+
+<table>
+  <tr>
+    <th>Phoneno</th>
+    <th>Name</th>
+    <th>Address</th>
+
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @telephones.each do |telephone| %>
+  <tr>
+    <td><%= telephone.phoneno %></td>
+    <td><%= telephone.name %></td>
+    <td><%= telephone.Address %></td>
+    <td><%= link_to 'Show', telephone %></td>
+    <td><%= link_to 'Edit', edit_telephone_path(telephone) %></td>
+    <td><%= link_to 'Destroy', telephone, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Telephone', new_telephone_path %>
